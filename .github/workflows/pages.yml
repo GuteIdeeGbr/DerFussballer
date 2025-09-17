@@ -22,13 +22,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      # Installiert die Abhängigkeiten (funktioniert auch ohne package-lock.json)
-      - run: npm install
-      # WICHTIG: Der Basis-Pfad muss dem Repo-Namen entsprechen
-      - run: npm run build -- --base=/DerFussballer/
-      - uses: actions/upload-pages-artifact@v4
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./vereinsmanager
+      - name: Build (mit Base-Pfad)
+        run: npm run build -- --base=/DerFussballer/
+        working-directory: ./vereinsmanager
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
         with:
-          path: ./dist
+          path: ./vereinsmanager/dist
 
   deploy:
     needs: build

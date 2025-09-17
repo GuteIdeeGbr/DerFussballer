@@ -24,14 +24,14 @@ jobs:
           node-version: 20
       - name: Install dependencies
         run: npm install
-        working-directory: ./vereinsmanager
+        working-directory: ./DerFussballer
       - name: Build (mit Base-Pfad)
         run: npm run build -- --base=/DerFussballer/
-        working-directory: ./vereinsmanager
+        working-directory: ./DerFussballer
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: ./vereinsmanager/dist
+          path: ./DerFussballer/dist
 
   deploy:
     needs: build
